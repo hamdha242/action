@@ -1,0 +1,28 @@
+name: Daily Auto Commit
+
+on:
+  schedule:
+    - cron: '0 3 * * *'  # Runs every day at 3 AM UTC
+
+jobs:
+  update-repo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set Up Git Config (hamdha.rasheedkk@gramener.com)
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "hamdha.rasheedkk@gramener.com"
+
+      - name: Make Changes
+        run: |
+          echo "Automated update: $(date)" >> update-log.txt
+          git add update-log.txt
+
+      - name: Commit and Push Changes
+        run: |
+          git commit -m "Daily automated commit: $(date)" || echo "No changes to commit"
+          git push
