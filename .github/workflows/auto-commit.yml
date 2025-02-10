@@ -30,4 +30,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git commit -m "Daily automated commit: $(date)" || echo "No changes to commit"
-          git push origin main  # Make sure 'main' is your branch name
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/hamdha242/action.git main
